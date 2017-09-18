@@ -1,0 +1,77 @@
+<!-- using double curly braces
+is the same as ${name} in ruby -->
+<h1>{{name}}</h1>
+
+<ul> 
+  <li> Age: {{age}}</li>
+  <li> Email: {{email}}</li>
+  <li> {{address.street}}, {{address.city}} {{address.state}}</li>
+</ul>
+
+
+<!-- create a button that runs the onClick() function when it is clicked -->
+<!-- the onClick() function is in the user.component.ts file -->
+<!-- (click) is an EVENT -->
+<button (click)="onClick()">Click me</button>
+
+<button (click)="toggleEdit()">Edit User</button>
+
+<div *ngIf=isEdit>
+  <h1>Edit User</h1>
+  <form>
+    <div>
+      <label for="name">Name: </label><br>
+      <!-- [()] indicates two way data binding -->
+      <input type="text" [(ngModel)]="name" name="name">
+    </div>
+    <div>
+      <label for="age">Age: </label><br>
+      <input type="number" [(ngModel)]="age" name="age">
+    </div>
+    <div>
+      <label for="email">Email: </label><br>
+      <input type="text" [(ngModel)]="email" name="email">
+    </div>
+    <div>
+      <label for="street">Street: </label><br>
+      <input type="text" [(ngModel)]="address.street" name="street">
+    </div>
+    <div>
+      <label for="city">City: </label><br>
+      <input type="text" [(ngModel)]="address.city" name="city">
+    </div>
+    <div>
+      <label for="state">State: </label><br>
+      <input type="text" [(ngModel)]="address.state" name="state">
+    </div>
+  </form>
+</div>
+
+<h1> Hobbies </h1>
+<!-- hobby.value pulls the info entered in the #hobby input form -->
+<form (submit)="addHobby(hobby.value)">
+  <div>
+    <label for="hobby">Hobby:</label>
+    <!-- #hobby is an ID for the text that is entered into the form
+    using an ID allows us to access the text elsewhere
+    such as in the addHobby() function -->
+    <input type="text" #hobby>
+  </div>
+</form>
+<ul> 
+  <!-- 
+  *ngFor is an Angular directive,
+  which is similar to using <%= %> in an html.erb file.
+  *ngFor loops through an array (specifically the array "hobbies",
+  which was generated in the component.ts file)
+  -->
+  <li *ngFor="let hobby of hobbies; let i = index">
+    {{i + 1}}: {{hobby}} <button (click)="deleteHobby(hobby)">X</button>
+  </li>
+</ul>
+
+<h1>Posts</h1>
+<div *ngFor="let post of posts">
+  <h4>{{post.title}}</h4>
+  <p>{{post.body}}</p>
+</div>
